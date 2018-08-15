@@ -1,5 +1,17 @@
 var canvas = document.getElementsByTagName('canvas')[0],
 	ctx = canvas.getContext('2d'),
+	mousePosWatch = document.getElementById('mousePosWatch'),
+	mousePos = {
+		x: null,
+		y: null,
+		set: function(x = null, y = null) {
+			this.x = x; 
+			this.y = y;
+		},
+		isset: function() {
+			return (this.x !=null && this.y != null);
+		}
+	},
 	spacing;
 
 // Utilities
@@ -28,7 +40,20 @@ function init() {
 	spacing = canvas.height / 20;
 	window.addEventListener('resize', resize);
 	canvas.addEventListener('mousemove', canvasMouseMove);
+	canvas.addEventListener('mouseout', canvasMouseOut);
 	resize();
+}
+
+function canvasMouseMove(e) {
+	var realMousePos = getMousePos(e.x, e.y);
+	mousePos.set(snap(realMousePos.x),snap(realMousePos.y));
+	mousePosWatch.innerHTML = 'Real: ('+realMousePos.x+', '+realMousePos.y+') Snapped: ('+mousePos.x+', '+mousePos.y+')';
+	
+}
+
+function canvasMouseOut(e) {
+	mousePos.set();
+	mousePosWatch.innerHTML = '';
 }
 
 function draw() {

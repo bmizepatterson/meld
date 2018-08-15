@@ -15,6 +15,15 @@ function drawLine(startX,startY,endX,endY) {
 
 function draw() {
 	ctx.clearRect(0,0,canvas.width,canvas.height);
+	// Draw grid
+	ctx.lineStyle = 1;
+	ctx.strokeStyle = '#CCC';
+	for (var i = spacing + 0.5; i < canvas.height; i+=spacing) {
+		drawLine(0, i, canvas.width, i);
+	}
+	for (var j = spacing + 0.5; j < canvas.width; j+=spacing) {
+		drawLine(j, 0, j, canvas.height);	
+	}
 }
 
 function init() {

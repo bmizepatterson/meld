@@ -18,6 +18,20 @@ function drawPoint(x,y,r=5,color='rgba(0,0,255,0.5') {
 	ctx.fillStyle = color;
 	ctx.fill();
 }
+function getMouseX(x) {
+	return x - canvas.offsetLeft + window.pageXOffset;
+}
+function getMouseY(y) {
+	return y - canvas.offsetTop + window.pageYOffset;
+}
+
+function init() {
+	canvas.height = 400;
+	spacing = canvas.height / 20;
+	window.addEventListener('resize', resize);
+	canvas.addEventListener('mousemove', canvasMouseMove);
+	resize();
+}
 
 function draw() {
 	ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -25,19 +39,13 @@ function draw() {
 	ctx.lineStyle = 1;
 	ctx.strokeStyle = '#CCC';
 	for (var i = spacing + 0.5; i < canvas.height; i+=spacing) {
-		drawLine(0, i, canvas.width, i);
+		drawLine(0, i, canvas.width, i);g
 	}
 	for (var j = spacing + 0.5; j < canvas.width; j+=spacing) {
 		drawLine(j, 0, j, canvas.height);	
 	}
 }
 
-function init() {
-	canvas.height = 400;
-	spacing = canvas.height / 20;
-	window.addEventListener('resize', resize);
-	resize();
-}
 
 function resize() {
 	canvas.width = window.innerWidth;

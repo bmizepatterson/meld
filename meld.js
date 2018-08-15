@@ -3,8 +3,8 @@ var canvas = document.getElementsByTagName('canvas')[0],
 	spacing;
 
 // Utilities
-function clamp(n, min, max) {
-  return Math.min(max, Math.max(min, n));
+function snap(val) {
+    return spacing * Math.round(val/spacing);
 }
 function drawLine(startX,startY,endX,endY) {
 	ctx.beginPath();

@@ -12,6 +12,12 @@ function drawLine(startX,startY,endX,endY) {
 	ctx.lineTo(endX, endY);
 	ctx.stroke();
 }
+function drawPoint(x,y,r=5,color='rgba(0,0,255,0.5') {
+	ctx.beginPath();
+	ctx.arc(x,y,r,0,2*Math.PI);
+	ctx.fillStyle = color;
+	ctx.fill();
+}
 
 function draw() {
 	ctx.clearRect(0,0,canvas.width,canvas.height);

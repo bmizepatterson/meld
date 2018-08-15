@@ -18,11 +18,9 @@ function drawPoint(x,y,r=5,color='rgba(0,0,255,0.5') {
 	ctx.fillStyle = color;
 	ctx.fill();
 }
-function getMouseX(x) {
-	return x - canvas.offsetLeft + window.pageXOffset;
-}
-function getMouseY(y) {
-	return y - canvas.offsetTop + window.pageYOffset;
+function getMousePos(x,y) {
+	return {x: x - wrapper.offsetLeft,
+			y: y - wrapper.offsetTop - mousePosWatch.clientHeight};
 }
 
 function init() {

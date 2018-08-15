@@ -44,15 +44,18 @@ function draw() {
 	for (var j = spacing + 0.5; j < canvas.width; j+=spacing) {
 		drawLine(j, 0, j, canvas.height);	
 	}
+	if (mousePos.isset()) {
+		drawPoint(mousePos.x + 0.5, mousePos.y + 0.5);
+	}
 }
 
 
 function resize() {
 	canvas.width = window.innerWidth;
 	if (window.innerHeight > canvas.height) {
-		canvas.style.top = (window.innerHeight - canvas.height)/2+'px';
+		wrapper.style.top = (window.innerHeight - wrapper.clientHeight)/2+'px';
 	} else {
-		canvas.style.top = 0;
+		wrapper.style.top = 0;
 	}
 }
 

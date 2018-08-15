@@ -6,6 +6,12 @@ var canvas = document.getElementsByTagName('canvas')[0],
 function clamp(n, min, max) {
   return Math.min(max, Math.max(min, n));
 }
+function drawLine(startX,startY,endX,endY) {
+	ctx.beginPath();
+	ctx.moveTo(startX, startY);
+	ctx.lineTo(endX, endY);
+	ctx.stroke();
+}
 
 function draw() {
 	ctx.clearRect(0,0,canvas.width,canvas.height);

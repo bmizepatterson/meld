@@ -1,5 +1,6 @@
 var canvas = document.getElementsByTagName('canvas')[0],
-	ctx = canvas.getContext('2d');
+	ctx = canvas.getContext('2d'),
+	spacing;
 
 // Utilities
 function clamp(n, min, max) {
@@ -12,6 +13,7 @@ function draw() {
 
 function init() {
 	canvas.height = 400;
+	spacing = canvas.height / 20;
 	window.addEventListener('resize', resize);
 	resize();
 }

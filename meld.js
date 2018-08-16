@@ -64,8 +64,9 @@ function Shape(x1, y1, x2, y2) {
 }
 
 function init() {
-	canvas.height = 400;
-	spacing = canvas.height / 20;
+	canvas.height = window.innerHeight;
+	canvas.width = window.innerWidth;
+	spacing = Math.round(canvas.height / 20);
 	window.addEventListener('resize', resize);
 	canvas.addEventListener('mousemove', canvasMouseMove);
 	canvas.addEventListener('mouseout', canvasMouseOut);
@@ -122,12 +123,8 @@ function draw() {
 
 
 function resize() {
+	canvas.height = window.innerHeight;
 	canvas.width = window.innerWidth;
-	if (window.innerHeight > canvas.height) {
-		wrapper.style.top = (window.innerHeight - wrapper.clientHeight)/2+'px';
-	} else {
-		wrapper.style.top = 0;
-	}
 }
 
 window.requestAnimFrame = (function(){

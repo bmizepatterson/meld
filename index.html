@@ -15,6 +15,10 @@
 		#wrapper {
 			position:relative;
 		}
+		#toolBar {
+			position:fixed;
+			top:0;
+		}
 		#statusBar {
 			position:fixed;
 			bottom:0;
@@ -29,8 +33,14 @@
 </head>
 <body>
 	<div id="wrapper">
-		<p id="statusBar"></p>
+		<div id="toolBar">
+			<button>Clear</button>
+			<button>Rectangle</button>
+			<button>Fill</button>
+			<button>Stroke</button>
+		</div>
 		<canvas></canvas>
+		<p id="statusBar"></p>
 	</div>
 	<script src="meld.js"></script>
 </body>

@@ -37,6 +37,7 @@ function getMousePos(x,y) {
 			y: y - wrapper.offsetTop - mousePosWatch.clientHeight};
 }
 
+// Objects
 function Shape(x1, y1, x2, y2) {
 	this.start = {
 		x: x1,
@@ -46,6 +47,7 @@ function Shape(x1, y1, x2, y2) {
 		x: x2,
 		y: y2
 	};
+	Shapes.push(this);
 	this.draw = function(stroke = true, strokeStyle = '#000', lineWidth = 2, fill = false, fillStyle = '#000') {
 		ctx.beginPath();
 		ctx.rect(this.start.x, this.start.y, this.end.x-this.start.x, this.end.y-this.start.y);

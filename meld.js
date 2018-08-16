@@ -1,6 +1,6 @@
 var canvas = document.getElementsByTagName('canvas')[0],
 	ctx = canvas.getContext('2d'),
-	mousePosWatch = document.getElementById('mousePosWatch'),
+	statusBar = document.getElementById('statusBar'),
 	mousePos = {
 		x: null,
 		y: null,
@@ -34,7 +34,7 @@ function drawPoint(x,y,r=5,color='rgba(0,0,255,0.5') {
 }
 function getMousePos(x,y) {
 	return {x: x - wrapper.offsetLeft,
-			y: y - wrapper.offsetTop - mousePosWatch.clientHeight};
+			y: y - wrapper.offsetTop};
 }
 
 // Objects
@@ -86,7 +86,7 @@ function canvasMouseUp() {
 function canvasMouseMove(e) {
 	var realMousePos = getMousePos(e.x, e.y);
 	mousePos.set(snap(realMousePos.x),snap(realMousePos.y));
-	mousePosWatch.innerHTML = 'Real: ('+realMousePos.x+', '+realMousePos.y+') Snapped: ('+mousePos.x+', '+mousePos.y+')';
+	statusBar.innerHTML = 'Real: ('+realMousePos.x+', '+realMousePos.y+') Snapped: ('+mousePos.x+', '+mousePos.y+')';
 
 	if (currentShape != null) {
 		currentShape.end.x = mousePos.x;
@@ -96,7 +96,7 @@ function canvasMouseMove(e) {
 
 function canvasMouseOut(e) {
 	mousePos.set();
-	mousePosWatch.innerHTML = '';
+	statusBar.innerHTML = '';
 	currentShape = null;
 }
 

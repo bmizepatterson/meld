@@ -14,7 +14,7 @@ var canvas = document.getElementsByTagName('canvas')[0],
 	},
 	spacing,
 	Shapes = [],
-	currentShape;
+	currentShape = null;
 
 // Utilities
 function snap(val) {
@@ -69,19 +69,34 @@ function init() {
 	window.addEventListener('resize', resize);
 	canvas.addEventListener('mousemove', canvasMouseMove);
 	canvas.addEventListener('mouseout', canvasMouseOut);
+	canvas.addEventListener('mousedown', canvasMouseDown);
+	canvas.addEventListener('mouseup', canvasMouseUp);
 	resize();
+}
+
+function canvasMouseDown() {
+	currentShape = new Shape(mousePos.x, mousePos.y, mousePos.x, mousePos.y);
+}
+
+function canvasMouseUp() {
+	currentShape = null;
 }
 
 function canvasMouseMove(e) {
 	var realMousePos = getMousePos(e.x, e.y);
 	mousePos.set(snap(realMousePos.x),snap(realMousePos.y));
 	mousePosWatch.innerHTML = 'Real: ('+realMousePos.x+', '+realMousePos.y+') Snapped: ('+mousePos.x+', '+mousePos.y+')';
-	
+
+	if (currentShape != null) {
+		currentShape.end.x = mousePos.x;
+		currentShape.end.y = mousePos.y;
+	}
 }
 
 function canvasMouseOut(e) {
 	mousePos.set();
 	mousePosWatch.innerHTML = '';
+	currentShape = null;
 }
 
 function draw() {

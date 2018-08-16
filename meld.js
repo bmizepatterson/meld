@@ -103,7 +103,7 @@ function canvasMouseOut(e) {
 function draw() {
 	ctx.clearRect(0,0,canvas.width,canvas.height);
 	// Draw grid
-	ctx.lineStyle = 1;
+	ctx.lineWidth = 1;
 	ctx.strokeStyle = '#CCC';
 	for (var i = spacing + 0.5; i < canvas.height; i+=spacing) {
 		drawLine(0, i, canvas.width, i);

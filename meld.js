@@ -12,7 +12,9 @@ var canvas = document.getElementsByTagName('canvas')[0],
 			return (this.x !=null && this.y != null);
 		}
 	},
-	spacing;
+	spacing,
+	Shapes = [],
+	currentShape;
 
 // Utilities
 function snap(val) {
@@ -33,6 +35,30 @@ function drawPoint(x,y,r=5,color='rgba(0,0,255,0.5') {
 function getMousePos(x,y) {
 	return {x: x - wrapper.offsetLeft,
 			y: y - wrapper.offsetTop - mousePosWatch.clientHeight};
+}
+
+function Shape(x1, y1, x2, y2) {
+	this.start = {
+		x: x1,
+		y: y1
+	};
+	this.end = {
+		x: x2,
+		y: y2
+	};
+	this.draw = function(stroke = true, strokeStyle = '#000', lineWidth = 2, fill = false, fillStyle = '#000') {
+		ctx.beginPath();
+		ctx.rect(this.start.x, this.start.y, this.end.x-this.start.x, this.end.y-this.start.y);
+		if (stroke) {
+			ctx.strokeStyle = strokeStyle;
+			ctx.lineWidth = 2;
+			ctx.stroke();
+		}
+		if (fill) {
+			ctx.fillStyle = fillStyle;
+			ctx.fill();
+		}
+	}
 }
 
 function init() {
@@ -67,6 +93,11 @@ function draw() {
 	for (var j = spacing + 0.5; j < canvas.width; j+=spacing) {
 		drawLine(j, 0, j, canvas.height);	
 	}
+	// Draw all the shapes
+	for (var k = 0; k < Shapes.length; k++) {
+		Shapes[k].draw();
+	}
+	// Last, draw mouse position as a point
 	if (mousePos.isset()) {
 		drawPoint(mousePos.x + 0.5, mousePos.y + 0.5);
 	}

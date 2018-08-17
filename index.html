@@ -18,6 +18,15 @@
 		#toolBar {
 			position:fixed;
 			top:0;
+			padding:4px;
+			transition: 0.5s;
+		}
+		#toolBar button {
+			background:#222;
+			height:32px;
+			width:32px;
+			outline:none;
+			border:none;
 		}
 		#statusBar {
 			position:fixed;
@@ -29,15 +38,20 @@
 			font-size:0.75rem;
 			line-height:1.5rem;
 		}
+		svg {
+			stroke-width:2;
+			stroke:#DDD;			
+		}
 	</style>
 </head>
 <body>
 	<div id="wrapper">
 		<div id="toolBar">
-			<button>Clear</button>
-			<button>Rectangle</button>
-			<button>Fill</button>
-			<button>Stroke</button>
+			<button>
+				<svg width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+					<rect x="1" y="1" width="20" height="20" />
+				</svg>
+			</button>
 		</div>
 		<canvas></canvas>
 		<p id="statusBar"></p>

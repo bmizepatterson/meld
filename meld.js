@@ -72,7 +72,22 @@ function init() {
 	canvas.addEventListener('mouseout', canvasMouseOut);
 	canvas.addEventListener('mousedown', canvasMouseDown);
 	canvas.addEventListener('mouseup', canvasMouseUp);
+	document.getElementById('shapeSquare').addEventListener('click', clickShapeSquare);
+	document.getElementById('clearCanvas').addEventListener('click', clickClearCanvas);
+	document.getElementById('setGrid').addEventListener('click', clickSetGrid);
 	resize();
+}
+
+function clickShapeSquare() {
+	document.getElementById('shapeSquare').classList.toggle('selected');
+}
+
+function clickClearCanvas() {
+	document.getElementById('clearCanvas').classList.toggle('selected');
+}
+
+function clickSetGrid() {
+	document.getElementById('setGrid').classList.toggle('selected');
 }
 
 function canvasMouseDown() {

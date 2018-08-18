@@ -148,8 +148,8 @@ function draw() {
 	for (var k = 0; k < Shapes.length; k++) {
 		Shapes[k].draw();
 	}
-	// Last, draw mouse position as a point
-	if (mousePos.isset()) {
+	// Last, draw mouse position as a point if we are in drawing mode
+	if (mode != 'select' && mousePos.isset()) {
 		drawPoint(mousePos.x + 0.5, mousePos.y + 0.5);
 	}
 }

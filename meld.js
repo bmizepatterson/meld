@@ -13,6 +13,7 @@ var canvas = document.getElementsByTagName('canvas')[0],
 		}
 	},
 	spacing,
+	mode = 'drawRect',
 	Shapes = [],
 	currentShape = null,
 	drawGrid = true;
@@ -81,6 +82,7 @@ function init() {
 
 function clickShapeRect() {
 	document.getElementById('shapeRect').classList.toggle('selected');
+	mode = (mode == 'drawRect') ? 'select' : 'drawRect';
 }
 
 function clickClearCanvas() {
@@ -94,7 +96,11 @@ function clickSetGrid() {
 }
 
 function canvasMouseDown() {
-	currentShape = new Shape(mousePos.x, mousePos.y, mousePos.x, mousePos.y);
+	switch (mode) {
+		case 'drawRect':
+			currentShape = new Shape(mousePos.x, mousePos.y, mousePos.x, mousePos.y);
+			break;
+	}
 }
 
 function canvasMouseUp() {

@@ -29,6 +29,9 @@ canvas {
 button.selected svg, button:hover svg {
 	stroke:#222;
 }
+button:active svg {
+	transform: translateY(1px);
+}
 #statusBar {
 	position:fixed;
 	bottom:0;

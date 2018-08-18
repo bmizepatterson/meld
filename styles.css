@@ -27,6 +27,9 @@ canvas {
 #toolBar button.selected, #toolBar button:hover {
 	background-color:#BBB;
 }
+#toolBar button:disabled {
+	display:none;
+}
 .btnGroup {
 	float:left;
 	margin-right:8px;

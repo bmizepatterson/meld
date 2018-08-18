@@ -16,7 +16,9 @@ var canvas = document.getElementsByTagName('canvas')[0],
 	mode = 'drawRect',
 	Shapes = [],
 	currentShape = null,
-	drawGrid = true;
+	drawGrid = true,
+	undoStack = [],
+	redoStack = [];
 
 // Utilities
 function snap(val) {
@@ -41,6 +43,7 @@ function getMousePos(x,y) {
 
 // Objects
 function Shape(x1, y1, x2, y2) {
+	this.deleted = false;
 	this.start = {
 		x: x1,
 		y: y1
@@ -51,6 +54,7 @@ function Shape(x1, y1, x2, y2) {
 	};
 	Shapes.push(this);
 	this.draw = function(stroke = true, strokeStyle = '#000', lineWidth = 2, fill = false, fillStyle = '#000') {
+		if (this.deleted) return;	// Don't draw deleted shapes
 		ctx.beginPath();
 		ctx.rect(this.start.x, this.start.y, this.end.x-this.start.x, this.end.y-this.start.y);
 		if (stroke) {
@@ -62,6 +66,12 @@ function Shape(x1, y1, x2, y2) {
 			ctx.fillStyle = fillStyle;
 			ctx.fill();
 		}
+	}
+	this.delete = function() {
+		this.deleted = true;
+	}
+	this.undelete = function() {
+		this.deleted = false;
 	}
 }
 
@@ -77,6 +87,8 @@ function init() {
 	document.getElementById('shapeRect').addEventListener('click', clickShapeRect);
 	document.getElementById('clearCanvas').addEventListener('click', clickClearCanvas);
 	document.getElementById('setGrid').addEventListener('click', clickSetGrid);
+	document.getElementById('undo').addEventListener('click', undo);
+	document.getElementById('redo').addEventListener('click', redo);
 	resize();
 }
 
@@ -111,6 +123,13 @@ function canvasMouseDown() {
 }
 
 function canvasMouseUp() {
+	if (currentShape != null) {
+		var operation = {
+			name: 'addShape',
+			data: currentShape
+		};
+		undoStack.push(operation);
+	}
 	currentShape = null;
 }
 
@@ -152,12 +171,39 @@ function draw() {
 	if (mode != 'select' && mousePos.isset()) {
 		drawPoint(mousePos.x + 0.5, mousePos.y + 0.5);
 	}
+	// Set undo/redo buttons
+	document.getElementById('undo').disabled = !undoStack.length;
+	document.getElementById('redo').disabled = !redoStack.length;
 }
 
 
 function resize() {
 	canvas.height = window.innerHeight;
 	canvas.width = window.innerWidth;
+}
+
+function undo() {
+	var operation = undoStack.pop();
+	switch (operation.name) {
+		case "addShape":
+			operation.data.delete();
+			break;
+		default:
+			console.log('Attempted to undo an unrecognized operation.');
+	}
+	redoStack.push(operation);
+}
+
+function redo() {
+	var operation = redoStack.pop();
+	switch (operation.name) {
+		case "addShape":
+			operation.data.undelete();
+			break;
+		default:
+			console.log('Attempted to undo an unrecognized operation.');
+	}
+	undoStack.push(operation);
 }
 
 window.requestAnimFrame = (function(){

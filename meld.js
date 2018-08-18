@@ -90,9 +90,16 @@ function clickClearCanvas() {
 }
 
 function clickSetGrid() {
-	document.getElementById('setGrid').classList.toggle('selected');
 	// Toggle drawGrid
-	drawGrid = drawGrid ? false : true;
+	gridButton = document.getElementById('setGrid');
+	gridButton.classList.toggle('selected');
+	if (drawGrid) {
+		drawGrid = false;
+		gridButton.title = 'Turn on the grid';
+	} else {
+		drawGrid = true;
+		gridButton.title = 'Turn off the grid';		
+	}
 }
 
 function canvasMouseDown() {

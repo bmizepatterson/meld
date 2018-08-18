@@ -21,10 +21,12 @@ canvas {
 	width:40px;
 	outline:none;
 	border:none;
+	display:block;
+	float:left;
 }
 #toolBar button.selected, #toolBar button:hover {
 	background-color:#BBB;
-	border: 1px solid #222;
+	/*border: 1px solid #222;*/
 }
 button.selected svg, button:hover svg {
 	stroke:#222;

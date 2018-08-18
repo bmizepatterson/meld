@@ -8,21 +8,27 @@
 <body>
 	<div id="wrapper">
 		<div id="toolBar">
-			<button id="shapeRect" class="selected" title="Draw a rectangle">
-				<i data-feather="square"></i>
-			</button>
-			<button id="clearCanvas" title="Erase everything">
-				<i data-feather="trash-2"></i>
-			</button>
-			<button id="setGrid" class="selected" title="Turn off the grid">
-				<i data-feather="grid"></i>
-			</button>
-			<button>
-				<i data-feather="corner-up-left"></i>
-			</button>
-			<button disabled>
-				<i data-feather="corner-up-right"></i>
-			</button>
+			<div class="btnGroup">
+				<button id="shapeRect" class="selected" title="Draw a rectangle">
+					<i data-feather="square"></i>
+				</button>
+			</div>
+			<div class="btnGroup">
+				<button id="clearCanvas" title="Erase everything">
+					<i data-feather="trash-2"></i>
+				</button>
+				<button id="setGrid" class="selected" title="Turn off the grid">
+					<i data-feather="grid"></i>
+				</button>
+			</div>
+			<div class="btnGroup">
+				<button>
+					<i data-feather="corner-up-left"></i>
+				</button>
+				<button disabled>
+					<i data-feather="corner-up-right"></i>
+				</button>
+			</div>
 		</div>
 		<canvas></canvas>
 		<p id="statusBar"></p>

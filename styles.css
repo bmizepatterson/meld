@@ -26,7 +26,11 @@ canvas {
 }
 #toolBar button.selected, #toolBar button:hover {
 	background-color:#BBB;
-	/*border: 1px solid #222;*/
+}
+.btnGroup {
+	float:left;
+	margin-right:8px;
+	border: 1px solid #222;
 }
 button.selected svg, button:hover svg {
 	stroke:#222;

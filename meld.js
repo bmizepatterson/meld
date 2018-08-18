@@ -14,7 +14,8 @@ var canvas = document.getElementsByTagName('canvas')[0],
 	},
 	spacing,
 	Shapes = [],
-	currentShape = null;
+	currentShape = null,
+	drawGrid = true;
 
 // Utilities
 function snap(val) {
@@ -88,6 +89,8 @@ function clickClearCanvas() {
 
 function clickSetGrid() {
 	document.getElementById('setGrid').classList.toggle('selected');
+	// Toggle drawGrid
+	drawGrid = drawGrid ? false : true;
 }
 
 function canvasMouseDown() {
@@ -118,13 +121,15 @@ function canvasMouseOut(e) {
 function draw() {
 	ctx.clearRect(0,0,canvas.width,canvas.height);
 	// Draw grid
-	ctx.lineWidth = 1;
-	ctx.strokeStyle = '#CCC';
-	for (var i = spacing + 0.5; i < canvas.height; i+=spacing) {
-		drawLine(0, i, canvas.width, i);
-	}
-	for (var j = spacing + 0.5; j < canvas.width; j+=spacing) {
-		drawLine(j, 0, j, canvas.height);	
+	if (drawGrid) {
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = '#CCC';
+		for (var i = spacing + 0.5; i < canvas.height; i+=spacing) {
+			drawLine(0, i, canvas.width, i);
+		}
+		for (var j = spacing + 0.5; j < canvas.width; j+=spacing) {
+			drawLine(j, 0, j, canvas.height);	
+		}
 	}
 	// Draw all the shapes
 	for (var k = 0; k < Shapes.length; k++) {

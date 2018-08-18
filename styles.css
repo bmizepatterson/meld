@@ -17,13 +17,13 @@ canvas {
 }
 #toolBar button {
 	background:#222;
-	height:31px;
-	width:32px;
+	height:39px;
+	width:40px;
 	outline:none;
 	border:none;
 }
 #toolBar button.selected, #toolBar button:hover {
-	background-color:#DDD;
+	background-color:#BBB;
 	border: 1px solid #222;
 }
 button.selected svg, button:hover svg {

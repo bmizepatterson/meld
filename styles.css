@@ -22,11 +22,11 @@ canvas {
 	outline:none;
 	border:none;
 }
-#toolBar button.selected {
+#toolBar button.selected, #toolBar button:hover {
 	background-color:#DDD;
 	border: 1px solid #222;
 }
-button.selected svg {
+button.selected svg, button:hover svg {
 	stroke:#222;
 }
 #statusBar {

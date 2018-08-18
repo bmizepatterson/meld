@@ -83,7 +83,7 @@ function clickShapeSquare() {
 }
 
 function clickClearCanvas() {
-	document.getElementById('clearCanvas').classList.toggle('selected');
+	Shapes = [];
 }
 
 function clickSetGrid() {

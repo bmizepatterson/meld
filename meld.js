@@ -18,7 +18,10 @@ var canvas = document.getElementsByTagName('canvas')[0],
 	currentShape = null,
 	drawGrid = true,
 	undoStack = [],
-	redoStack = [];
+	redoStack = [],
+	btnUndo = document.getElementById('undo'),
+	btnRedo = document.getElementById('redo'),
+	btnStrokeColor = document.getElementById('strokeColor');
 
 // Utilities
 function snap(val) {
@@ -178,18 +181,29 @@ function draw() {
 	if (mode != 'select' && mousePos.isset()) {
 		drawPoint(mousePos.x + 0.5, mousePos.y + 0.5);
 	}
-	// Set undo/redo buttons
-	document.getElementById('undo').disabled = !undoStack.length;
-	document.getElementById('redo').disabled = !redoStack.length;
-	if (!undoStack.length && !redoStack.length) {
-		document.getElementById('undo').parentElement.style.display = "none";
+	// Set toolbar buttons
+	
+	if (undoStack.length) {
+		btnUndo.disabled = false;
+		btnUndo.title = getDescription(undoStack[undoStack.length - 1]);
 	} else {
-		document.getElementById('undo').parentElement.style.display = "block";
+		btnUndo.disabled = true;
+	}
+	if (redoStack.length) {
+		btnRedo.disabled = false;
+		btnRedo.title = getDescription(redoStack[redoStack.length - 1], false);
+	} else {
+		btnRedo.disabled = true;
+	}
+	if (!undoStack.length && !redoStack.length) {
+		btnUndo.parentElement.style.display = "none";
+	} else {
+		btnUndo.parentElement.style.display = "block";
 	}
 	if (mode == 'drawRect') {
-		document.getElementById('strokeColor').parentElement.style.display = "block";		
+		btnStrokeColor.parentElement.style.display = "block";		
 	} else {
-		document.getElementById('strokeColor').parentElement.style.display = "none";		
+		btnStrokeColor.parentElement.style.display = "none";		
 	}
 }
 

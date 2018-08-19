@@ -23,6 +23,7 @@ canvas {
 	border:none;
 	display:block;
 	float:left;
+	color:#DDD;
 }
 #toolBar button.selected, #toolBar button:hover {
 	background-color:#BBB;

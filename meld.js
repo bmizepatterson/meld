@@ -98,7 +98,14 @@ function clickShapeRect() {
 }
 
 function clickClearCanvas() {
-	Shapes = [];
+	for (var i = 0; i < Shapes.length; i++) {
+		Shapes[i].delete();
+	}
+	var operation = {
+		name: 'clearCanvas',
+		data: Shapes
+	}
+	undoStack.push(operation);
 }
 
 function clickSetGrid() {
@@ -198,6 +205,11 @@ function undo() {
 		case "addShape":
 			operation.data.delete();
 			break;
+		case "clearCanvas":
+			for (let i = 0; i < operation.data.length; i++) {
+				operation.data[i].undelete();
+			}
+			break;
 		default:
 			console.log('Attempted to undo an unrecognized operation.');
 	}
@@ -209,6 +221,11 @@ function redo() {
 	switch (operation.name) {
 		case "addShape":
 			operation.data.undelete();
+			break;
+		case "clearCanvas":
+			for (let i = 0; i < operation.data.length; i++) {
+				operation.data[i].delete();
+			}
 			break;
 		default:
 			console.log('Attempted to undo an unrecognized operation.');

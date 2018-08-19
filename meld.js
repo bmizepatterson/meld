@@ -174,6 +174,11 @@ function draw() {
 	// Set undo/redo buttons
 	document.getElementById('undo').disabled = !undoStack.length;
 	document.getElementById('redo').disabled = !redoStack.length;
+	if (!undoStack.length && !redoStack.length) {
+		document.getElementById('undo').parentElement.style.display = "none";
+	} else {
+		document.getElementById('undo').parentElement.style.display = "block";
+	}
 	if (mode == 'drawRect') {
 		document.getElementById('strokeColor').parentElement.style.display = "block";		
 	} else {

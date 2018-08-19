@@ -233,6 +233,15 @@ function redo() {
 	undoStack.push(operation);
 }
 
+function getDescription(operation, undo=true) {
+	// Returns a human-readable description of an operation
+	var verb = undo ? "Undo " : "Redo ";
+	switch (operation.name) {
+		case 'addShape' 	: return verb + 'add shape';
+		case 'clearCanvas'  : return verb + 'erase everything';
+	}
+}
+
 window.requestAnimFrame = (function(){
   return  window.requestAnimationFrame       ||
           window.webkitRequestAnimationFrame ||

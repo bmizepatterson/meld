@@ -182,7 +182,6 @@ function draw() {
 		drawPoint(mousePos.x + 0.5, mousePos.y + 0.5);
 	}
 	// Set toolbar buttons
-	
 	if (undoStack.length) {
 		btnUndo.disabled = false;
 		btnUndo.title = getDescription(undoStack[undoStack.length - 1]);
